@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="soo_progect1">
+
+	<typeAlias alias="PageVO"  type="com.soo.projectboard.PageVO" />
+	<typeAlias alias="SearchVO"  type="com.soo.projectboard.SearchVO" />
+	<typeAlias alias="sooprojectBoardVO"  type="com.soo.projectboard.Soo_projectBoardVO" />
+	<typeAlias alias="sooprojectBoardDTO"  type="com.soo.projectboard.Soo_projectBoardDTO" />
+
+	<!-- DB컬럼명과 VO클래스의 필드명 매핑작업 -->
+	<!-- <resultMap id="BoardMap" type="com.soo.projectboard.Soo_projectBoardVO">
+		
+		<id property="board_seq" column="board_seq"/>
+		<result property="board_content_text" column="board_content_text"/>
+		<result property="board_title" column="board_title"/>
+		<result property="board_reg_date" column="board_reg_date"/>
+		<result property="board_mod_date" column="board_mod_date"/>
+		<result property="board_notice" column="board_notice"/>
+		<result property="board_img_path" column="board_img_path"/>
+		<result property="board_del_yn" column="board_del_yn"/>
+		<result property="board_type" column="board_type"/>
+		<result property="board_writer_pass" column="board_writer_pass"/>
+
+	</resultMap>
+	 -->
+
+		<!--  아이디는 임의로 설정 -->
+		<sql id="search">
+
+		<isEqual property="condition" compareValue="title">
+			where board_title LIKE CONCAT('%', #keyword#, '%')
+			</isEqual>
+	
+		<isEqual property="condition" compareValue="writer">
+			where board_writer_name LIKE CONCAT('%', #keyword#, '%')
+		</isEqual>
+		
+			<isEqual property="condition" compareValue="content">
+			where board_content_text LIKE CONCAT('%', #keyword#, '%')
+			</isEqual>
+
+			<isEqual property="condition" compareValue="titleContent">
+			where board_title LIKE CONCAT('%', #keyword#, '%')
+			OR  board_content_text LIKE CONCAT('%', #keyword#, '%')
+		</isEqual>
+		
+			<isEqual property="condition" compareValue="board_reg_date">
+			where board_reg_date LIKE CONCAT('%', #keyword#, '%')
+		</isEqual>
+
+		</sql>
+
+
+	<!-- 게시글 전체목록 보기  -->
+	<select id="soo_projectBoardDAO.List_Board" parameterClass="SearchVO" resultClass="sooprojectBoardVO">
+
+		SELECT  
+	
+		board_seq,
+		board_content_text,
+		board_title,
+		board_writer_name,
+		board_reg_date,
+		board_mod_date,
+		board_notice,
+		board_img_path,
+		board_del_yn,
+		board_type,
+		board_writer_pass,
+		imageFileName
+		
+		FROM Soo_Edu_board
+		<include refid="search"/>
+		ORDER BY board_seq DESC
+		LIMIT #pageStart#,#countPerPage#
+	
+	</select>
+
+<select id="soo_projectBoardDAO.select_Board" parameterClass="int" resultClass="sooprojectBoardVO">
+
+    SELECT  
+	
+	*
+	FROM Soo_Edu_board
+	where board_seq = #board_seq#
+</select>
+
+<select id="countArticles" resultClass="int">
+
+select count(*)
+from Soo_Edu_board
+<include refid="search"/>
+
+</select>
+
+
+   <update id="insertNewArticle" parameterClass="HashMap">
+      <![CDATA[
+         INSERT into Soo_Edu_board(board_seq,board_title, board_content_text,imageFileName,board_writer_name,board_type)
+         VALUES(#board_seq#,#board_title#,#board_content_text#, #imageFileName#,#board_writer_name#,$board_type$)
+      ]]>
+   </update>
+   
+   <!--  글번호 -->
+   	<select id="selectNewArticleNO" resultClass="int">
+		<![CDATA[
+		  SELECT  nvl(max(board_seq), 0) + 1 from Soo_Edu_board;
+   	
+		]]>
+	</select>
+	
+	<select id="getArticleListByTitle" parameterClass="SearchVO" resultClass="sooprojectBoardVO">
+		SELECT * 
+		FROM Soo_Edu_board 
+		WHERE board_title LIKE CONCAT('%', #keyword#,'%')
+		ORDER BY board_seq DESC 
+		LIMIT #pageStart#, #countPerPage#
+	</select>
+	
+	
+		<update id="updateArticle" parameterClass="Map">
+			update Soo_Edu_board 
+			set board_content_text = #board_content_text#
+			<isNotNull property="imageFileName">
+				,imageFileName = #imageFileName#
+			</isNotNull>
+			where board_seq = #board_seq#		
+		</update>
+	 
+<delete id="deleteArticle" parameterClass="int">
+
+
+delete from Soo_Edu_board 
+where board_seq = #board_seq#
+
+</delete>
+
+
+	
+
+</sqlMap>

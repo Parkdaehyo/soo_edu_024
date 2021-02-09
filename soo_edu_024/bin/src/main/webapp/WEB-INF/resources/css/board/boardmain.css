@@ -1,0 +1,29 @@
+
+body {
+    font-size: 10px;
+}
+
+.one {
+	font-size: 10px;
+}
+
+
+.firstRow{
+	margin-bottom: 4px;
+	margin-right: 4px;
+	background-color: gray;
+	font-size: 16px;
+	height : 25px;
+	text-align: center;
+	
+}
+
+
+.list_content{
+	margin-bottom: 4px;
+	margin-right: 4px;
+	font-size: 10px;
+	text-align : center;
+	background-color: silver;
+	height: 30px;
+}

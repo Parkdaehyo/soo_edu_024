@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="soo_progect1">
+
+	<typeAlias alias="sooprojectMainVO"  type="com.soo.projectmain.Soo_projectMainVO" />
+
+
+
+  <select id="soo_projectMainDAO.test"  parameterClass="sooprojectMainVO"  resultClass="int">
+  	select count(seq) AS seq from test.soo_board
+  </select>
+
+</sqlMap>

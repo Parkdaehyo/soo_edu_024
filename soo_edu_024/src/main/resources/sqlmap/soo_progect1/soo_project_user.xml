@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="soo_progect1">
+
+	<typeAlias alias="sooprojectUserVO"  type="com.soo.projectuser.Soo_projectUserVO" />
+
+<select	id="soo_projectUserDAO.User_list" parameterClass="sooprojectUserVO" resultClass="sooprojectUserVO">
+	select 
+			ftp_user_seq
+			,ftp_user_name
+			,ftp_user_birth
+			,ftp_user_phone
+			,ftp_user_zipcode
+			,ftp_user_addr1
+			,ftp_user_addr2
+			,ftp_user_mail
+	from soo_user_master
+</select>
+
+	<!-- 회원가입 SQL -->
+	<insert id="register" parameterClass="sooprojectUserVO">
+
+		INSERT INTO Soo_Edu_User
+		(soo_user_name,soo_user_password,soo_user_birth,soo_user_phone,soo_user_zipcode,soo_user_addr1,soo_user_addr2,soo_user_mail,soo_user_nick,roadAddress,jibunAddress) <!-- SQL문 -->
+VALUES (#soo_user_name#, #soo_user_password#,#soo_user_birth#,#soo_user_phone#,#soo_user_zipcode#,#soo_user_addr1#,#soo_user_addr2#,#soo_user_mail#,#soo_user_nick#,#roadAddress#,#jibunAddress#) <!-- 매칭할 UserVO의 getter메서드 -->
+
+	</insert>
+
+<select id="loginById"  resultClass="sooprojectUserVO"  parameterClass="sooprojectUserVO">
+	
+		select * from Soo_Edu_User
+		where soo_user_name =#soo_user_name# and soo_user_password =#soo_user_password#		
+		   
+  </select>
+  
+  <!--  <select id="findid" parameterType="String" resultType="com.spring.mvc.user.model.UserVO"> -->
+	<select id="findid" resultClass="sooprojectUserVO">
+		SELECT * FROM Soo_Edu_User
+		WHERE soo_user_birth =#soo_user_birth# and
+		     soo_user_phone=#soo_user_phone#
+	</select>
+  
+  <update id="accessTime" parameterClass="Date">
+  
+ <!--  <isNotNull property="soo_user_name"> -->
+
+	update Soo_Edu_User
+
+	set accessTime = #accessTime#
+<!-- 	</isNotNull> -->
+	where soo_user_name =#soo_user_name#
+ 
+  </update>
+  
+ <!--  <select id="timenow" resultClass="Date">
+  
+  select sysdate()
+  
+  </select>
+ -->
+
+
+
+</sqlMap>

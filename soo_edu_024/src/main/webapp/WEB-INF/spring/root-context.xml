@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"> -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name ="url" value="jdbc:log4jdbc:mysql://125.141.105.89/soo_edu_024?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"/>
+	<!-- 	<property name ="url" value="jdbc:log4jdbc:mysql://192.168.219.102:3306/test"/>-->
+		<property name ="username" value="root"/>
+		<property name ="password" value="sooadmin1"/>
+	</bean>
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		 <property name="configLocation" value="classpath:/sqlmap/sql-map-config.xml"/>
+		  <property name="dataSource" ref="dataSource"/>
+	</bean>  
+	
+	
+	
+	
+	
+	
+	
+    <!-- For Pagination Tag -->   
+	 <!-- For Pagination Tag -->   
+    <bean id="textRenderer" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationRenderer"/>
+    <bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+         <property name="rendererType">
+                 <map>
+                    <entry key="text" value-ref="textRenderer"/>
+                 </map>
+         </property>
+      </bean> 
+</beans>

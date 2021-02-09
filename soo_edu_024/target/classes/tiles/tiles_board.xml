@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="" />
+   </definition>
+
+	<!--  definition name="폴더의 경로를 적어준다. 그러면, 그 화면 요청이 들어왔을때 이 함수가 실행된다." -->
+   <definition name="views/soo_edu_Main" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/soo_edu_Main.jsp" />
+   </definition>
+   
+   <definition name="/views/soo_edu_user_insert" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/soo_edu_user_insert.jsp" />
+   </definition>
+   
+   <!--  name은 컨트롤러 return 에서 최종적으로 받는곳으로 된다. -->
+     <definition name="/user/loginForm" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/user/loginForm.jsp" />
+   </definition>
+   
+    <definition name="/views/board/board_list" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/board/board_list.jsp" />
+   </definition>
+   
+    <definition name="/views/board/board_view" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/board/board_view.jsp" />
+   </definition>
+   
+    <definition name="/board/articleForm" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" />
+   </definition>
+   
+     <definition name="/views/user/Find" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/user/Find.jsp" />
+   </definition>
+   
+     <definition name="views/map" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/map.jsp" />
+   </definition>
+ 
+   
+   
+   </tiles-definitions>

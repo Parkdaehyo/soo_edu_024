@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="soo_progect1">
+
+	<typeAlias alias="sooprojectBoardVO"  type="com.soo.projectboard.Soo_projectBoardVO" />
+	<typeAlias alias="sooprojectBoardDTO"  type="com.soo.projectboard.Soo_projectBoardDTO" />
+
+	<!-- DB컬럼명과 VO클래스의 필드명 매핑작업 -->
+	<!-- <resultMap id="BoardMap" type="com.soo.projectboard.Soo_projectBoardVO">
+		
+		<id property="board_seq" column="board_seq"/>
+		<result property="board_content_text" column="board_content_text"/>
+		<result property="board_title" column="board_title"/>
+		<result property="board_reg_date" column="board_reg_date"/>
+		<result property="board_mod_date" column="board_mod_date"/>
+		<result property="board_notice" column="board_notice"/>
+		<result property="board_img_path" column="board_img_path"/>
+		<result property="board_del_yn" column="board_del_yn"/>
+		<result property="board_type" column="board_type"/>
+		<result property="board_writer_pass" column="board_writer_pass"/>
+
+	</resultMap>
+	 -->
+
+	<!-- 게시글 전체목록 보기  -->
+	
+	<select id="soo_projectBoardDAO.List_Board" resultClass="sooprojectBoardVO">
+
+		SELECT  
+	
+		board_seq,
+		board_content_text,
+		board_title,
+		board_writer_name,
+		board_reg_date,
+		board_mod_date,
+		board_notice,
+		board_img_path,
+		board_del_yn,
+		board_type,
+		board_writer_pass
+		
+		FROM Soo_Edu_board
+	
+	</select>
+	
+	
+	<select id="getArticle" parameterType="int" resultClass="sooprojectBoardVO">
+	
+		SELECT 
+	
+		board_seq,
+		board_content_text,
+		board_title,
+		board_writer_name,
+		board_reg_date,
+		board_mod_date,
+		board_notice,
+		board_img_path,
+		board_del_yn,
+		board_type,
+		board_writer_pass
+		
+		FROM Soo_Edu_board
+		WHERE board_seq =#{board_seq}
+	
+	</select>
+s
+	<!-- <insert id="insert">
+	
+		INSERT INTO Soo_Edu_board
+		  (board_title, board_notice,board_content_text, board_writer_name)
+		VALUES (#{board_title}, #{board_notice},#{board_content_text}, #{board_writer_name})
+	
+	
+	</insert> -->
+
+<!--  	
+
+	board_seq,
+			board_title, 
+			board_writer_name, 
+			board_content_text,
+			board_reg_date
+
+WHERE board_del_yn = 'N' -->
+
+</sqlMap>

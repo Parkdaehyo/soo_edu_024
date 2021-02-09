@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="soo_progect1">
+
+	<typeAlias alias="sooprojectUserVO"  type="com.soo.projectuser.Soo_projectUserVO" />
+
+<select	id="soo_projectUserDAO.User_list" parameterClass="sooprojectUserVO" resultClass="sooprojectUserVO">
+	select 
+			ftp_user_seq
+			,ftp_user_name
+			,ftp_user_birth
+			,ftp_user_phone
+			,ftp_user_zipcode
+			,ftp_user_addr1
+			,ftp_user_addr2
+			,ftp_user_mail
+	from soo_user_master
+</select>
+
+</sqlMap>
